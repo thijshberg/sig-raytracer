@@ -1,0 +1,181 @@
+{
+  "width": 800,
+  "height": 800,
+  "samples_per_pixel": 128,
+  "nr_probes": 1000000,
+  "max_depth": 50,
+  "camera": {
+    "look_from": {
+      "x": -20.0,
+      "y": 100.0,
+      "z": 50.0
+    },
+    "look_at": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0
+    },
+    "vup": {
+      "x": 0.0,
+      "y": 1.0,
+      "z": 0.0
+    },
+    "vfov": 50.0,
+    "aspect": 1.0
+  },
+  "objects": [
+    {
+      "origin": {
+        "x": 400.0,
+        "y": 0.0,
+        "z": 400.0
+      },
+      "dim_x": 400.0,
+      "dim_y": 0.0,
+      "dim_z": 400.0,
+      "id":0,
+      "material": {
+        "Lambertian": {
+          "albedo": [
+            0.5,
+            0.5,
+            0.5
+          ]
+        }
+      }
+    },
+    {
+      "origin": {
+        "x": 400.0,
+        "y": 50.0,
+        "z": 400.0
+      },
+      "dim_x": 1.0,
+      "dim_y": 1.0,
+      "dim_z": 1.0,
+      "id":0,
+      "material": {
+        "Light": {
+          "color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "strength": 30.0,
+          "beams": 3,
+          "frequency":2000
+        }
+      }
+    },
+    {
+      "origin": {
+        "x": 350.0,
+        "y": 30.0,
+        "z": 320.0
+      },
+      "dim_x": 10.0,
+      "dim_y": 30.0,
+      "dim_z": 30.0,
+      "id":0,
+      "material": {
+        "Metal": {
+          "albedo": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "fuzz": 0.1,
+          "dampening": 5.0
+        }
+      }
+    },
+    {
+      "origin": {
+        "x": 430.0,
+        "y": 8.0,
+        "z": 370.0
+      },
+      "dim_x": 8.0,
+      "dim_y": 8.0,
+      "dim_z": 8.0,
+      "id":0,
+      "material": {
+        "Metal": {
+          "albedo": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "fuzz": 0.1,
+          "dampening": 5.0
+        }
+      }
+    },
+    {
+      "origin": {
+        "x": 430.0,
+        "y": 8.0,
+        "z": 430.0
+      },
+      "dim_x": 8.0,
+      "dim_y": 8.0,
+      "dim_z": 8.0,
+      "id":0,
+      "material": {
+        "Metal": {
+          "albedo": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "fuzz": 0.1,
+          "dampening": 5.0
+        }
+      }
+    },
+    {
+      "origin": {
+        "x": 370.0,
+        "y": 8.0,
+        "z": 430.0
+      },
+      "dim_x": 8.0,
+      "dim_y": 8.0,
+      "dim_z": 8.0,
+      "id":0,
+      "material": {
+        "Metal": {
+          "albedo": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "fuzz": 0.1,
+          "dampening": 5.0
+        }
+      }
+    },
+    {
+      "origin": {
+        "x": 330.0,
+        "y": 20.0,
+        "z": 420.0
+      },
+      "dim_x": 8.0,
+      "dim_y": 20.0,
+      "dim_z": 8.0,
+      "id":0,
+      "material": {
+        "Metal": {
+          "albedo": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "fuzz": 0.1,
+          "dampening": 5.0
+        }
+      }
+    }
+  ]
+}
