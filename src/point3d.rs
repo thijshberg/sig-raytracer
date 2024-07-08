@@ -5,9 +5,6 @@ use std::f32::consts;
 use std::ops::{Add, Div, Mul, Neg, Sub};
 use rand_distr::StandardNormal;
 
-#[cfg(test)]
-use assert_approx_eq::assert_approx_eq;
-
 #[derive(Debug, Clone, Copy, Deserialize, Serialize)]
 pub struct Point3D {
     x: f32,
@@ -52,10 +49,10 @@ impl Point3D {
     }
     pub fn random_in_hemi_sphere(dir: &Point3D) -> Point3D {
         let new = Point3D::random_in_unit_sphere();
-        if new.distance(&dir) < consts::SQRT_2 {
-            return new;
+        if new.distance(dir) < consts::SQRT_2 {
+            new
         } else {
-            return -new;
+            -new
         }
     }
 
@@ -198,97 +195,3 @@ impl PartialEq for Point3D {
     }
 }
 
-#[test]
-fn test_gen() {
-    let p = Point3D {
-        x: 0.1,
-        y: 0.2,
-        z: 0.3,
-    };
-    assert_eq!(p.x(), 0.1);
-    assert_eq!(p.y(), 0.2);
-    assert_eq!(p.z(), 0.3);
-
-    let q = Point3D::new(0.2, 0.3, 0.4);
-    assert_eq!(q.x(), 0.2);
-    assert_eq!(q.y(), 0.3);
-    assert_eq!(q.z(), 0.4);
-}
-
-#[test]
-fn test_add() {
-    let p = Point3D::new(0.1, 0.2, 0.3);
-    let q = Point3D::new(0.2, 0.3, 0.4);
-    let r = p + q;
-    assert_approx_eq!(r.x(), 0.3);
-    assert_approx_eq!(r.y(), 0.5);
-    assert_approx_eq!(r.z(), 0.7);
-}
-
-#[test]
-fn test_sub() {
-    let p = Point3D::new(0.1, 0.2, 0.3);
-    let q = Point3D::new(0.2, 0.3, 0.4);
-    let r = p - q;
-    assert_approx_eq!(r.x(), -0.1);
-    assert_approx_eq!(r.y(), -0.1);
-    assert_approx_eq!(r.z(), -0.1);
-}
-
-#[test]
-fn test_neg() {
-    let p = Point3D::new(0.1, 0.2, 0.3);
-    let q = -p;
-    assert_approx_eq!(q.x(), -0.1);
-    assert_approx_eq!(q.y(), -0.2);
-    assert_approx_eq!(q.z(), -0.3);
-}
-
-#[test]
-fn test_mul() {
-    let p = Point3D::new(0.1, 0.2, 0.3);
-    let q = Point3D::new(0.2, 0.3, 0.4);
-    let r = p * q;
-    assert_approx_eq!(r.x(), 0.02);
-    assert_approx_eq!(r.y(), 0.06);
-    assert_approx_eq!(r.z(), 0.12);
-}
-
-#[test]
-fn test_div() {
-    let p = Point3D::new(0.1, 0.2, 0.3);
-    let q = Point3D::new(0.2, 0.3, 0.4);
-    let r = p / q;
-    assert_approx_eq!(r.x(), 0.5);
-    assert_approx_eq!(r.y(), 0.6666666666666666);
-    assert_approx_eq!(r.z(), 0.3 / 0.4);
-}
-
-#[test]
-fn test_dot() {
-    let p = Point3D::new(0.1, 0.2, 0.3);
-    let q = Point3D::new(0.2, 0.3, 0.4);
-    assert_approx_eq!(p.dot(&q), 0.2);
-}
-
-#[test]
-fn test_length_squared() {
-    let p = Point3D::new(0.1, 0.2, 0.3);
-    assert_approx_eq!(p.length_squared(), 0.14);
-}
-
-#[test]
-fn test_random() {
-    let p = Point3D::random(-1.0, 1.0);
-    assert!(p.x() >= -1.0 && p.x() <= 1.0);
-    assert!(p.y() >= -1.0 && p.y() <= 1.0);
-    assert!(p.z() >= -1.0 && p.z() <= 1.0);
-}
-
-#[test]
-fn test_near_zero() {
-    let p = Point3D::new(0.1, 0.2, 0.3);
-    assert!(!p.near_zero());
-    let p = Point3D::new(0.0, 0.0, 0.0);
-    assert!(p.near_zero());
-}

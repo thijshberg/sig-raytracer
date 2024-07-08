@@ -6,15 +6,6 @@ use crate::ray::HitRecord;
 use crate::ray::Hittable;
 use crate::ray::Ray;
 
-#[cfg(test)]
-use crate::materials::Glass;
-#[cfg(test)]
-use crate::materials::Lambertian;
-#[cfg(test)]
-use crate::materials::Texture;
-#[cfg(test)]
-use palette::Srgb;
-
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Cube {
     pub origin: Point3D,
@@ -93,7 +84,7 @@ impl Cube {
                 results.push((intersect, t, normal));
             }
         }
-        if results.len() == 0 {
+        if results.is_empty() {
             return None;
         }
         if self.origin.x() > 0.1 && self.origin.y() > 0.1 {
@@ -115,7 +106,7 @@ impl Hittable for Cube {
                 return Some(HitRecord {
                     t: ray_t,
                     point: hit_loc,
-                    normal: normal,
+                    normal,
                     front_face: ray.direction.dot(&normal) > 0.0,
                     material: &self.material,
                     u,

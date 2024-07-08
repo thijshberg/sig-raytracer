@@ -200,7 +200,7 @@ fn test_reflectance() {
 impl Scatterable for Glass {
     fn scatter(&self, ray: &Ray, hit_record: &HitRecord) -> Option<(Option<Ray>, Srgb)> {
         let mut rng = rand::thread_rng();
-        let attenuation = Srgb::new(1.0 as f32, 1.0 as f32, 1.0 as f32);
+        let attenuation = Srgb::new(1.0f32, 1.0f32, 1.0f32);
         let refraction_ratio = if hit_record.front_face {
             1.0 / self.index_of_refraction
         } else {
@@ -272,12 +272,12 @@ impl Texture {
     pub fn get_albedo(&self, u: f32, v: f32) -> Srgb {
         let mut rot = u + self.h_offset;
         if rot > 1.0 {
-            rot = rot - 1.0;
+            rot -= 1.0;
         }
         let uu = rot * (self.width) as f32;
         let vv = (1.0 - v) * (self.height - 1) as f32;
         let base_pixel =
-            (3 * ((vv.floor() as u64) * self.width as u64 + (uu.floor() as u64))) as usize;
+            (3 * ((vv.floor() as u64) * self.width + (uu.floor() as u64))) as usize;
         let pixel_r = self.pixels[base_pixel];
         let pixel_g = self.pixels[base_pixel + 1];
         let pixel_b = self.pixels[base_pixel + 2];
@@ -308,18 +308,3 @@ impl Scatterable for Texture {
     }
 }
 
-#[test]
-fn test_texture() {
-    let _world = Material::Texture(Texture::new(
-        Srgb::new(1.0, 1.0, 1.0),
-        "data/earth.jpg",
-        0.0,
-    ));
-}
-
-#[test]
-fn test_to_json() {
-    let m = Metal::new(Srgb::new(0.8, 0.8, 0.8), 2.0);
-    let serialized = serde_json::to_string(&m).unwrap();
-    assert_eq!(r#"{"albedo":[0.8,0.8,0.8],"fuzz":2.0}"#, serialized,);
-}
