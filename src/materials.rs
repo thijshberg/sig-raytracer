@@ -276,8 +276,7 @@ impl Texture {
         }
         let uu = rot * (self.width) as f32;
         let vv = (1.0 - v) * (self.height - 1) as f32;
-        let base_pixel =
-            (3 * ((vv.floor() as u64) * self.width + (uu.floor() as u64))) as usize;
+        let base_pixel = (3 * ((vv.floor() as u64) * self.width + (uu.floor() as u64))) as usize;
         let pixel_r = self.pixels[base_pixel];
         let pixel_g = self.pixels[base_pixel + 1];
         let pixel_b = self.pixels[base_pixel + 2];
@@ -307,4 +306,3 @@ impl Scatterable for Texture {
         Some((Some(scattered), attenuation))
     }
 }
-

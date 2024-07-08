@@ -6,7 +6,7 @@ use raytracer::raytracer::render;
 use raytracer::signal_map::generate_sigmap;
 
 #[derive(Parser)]
-struct Args{
+struct Args {
     config: String,
     ouput_filename: String,
     #[arg(long)]
@@ -16,7 +16,7 @@ struct Args{
     #[arg(long)]
     png: bool,
     #[arg(long)]
-    no_render: bool
+    view: bool,
 }
 
 fn main() {
@@ -26,9 +26,9 @@ fn main() {
 
     let filename = args.ouput_filename.as_str(); //format!("{}_{:0>3}.png", args[2], i);
     println!("\nRendering {}", filename);
-    generate_sigmap(filename, &scene,args.times,args.angles,args.png);
-    if !args.no_render{
+    generate_sigmap(filename, &scene, args.times, args.angles, args.png);
+    if args.view {
         let view_name = filename.to_string() + "_view.png";
-        render(&view_name,&scene);
+        render(&view_name, &scene);
     }
 }
